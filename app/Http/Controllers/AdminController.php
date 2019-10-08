@@ -16,7 +16,7 @@ class AdminController extends Controller
 
     public function index() {
 
-        $products = Product::orderBy('created_at', 'desc')->get();
+        $products = Product::orderBy('updated_at', 'desc')->get();
         return view('administrator.index', ['products' => $products]);
     }
 

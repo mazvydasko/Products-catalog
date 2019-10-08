@@ -13,9 +13,9 @@
                         <div class="card-body">
                             <h4 class="card-title text-center">{{$product->product_name}}</h4>
                             @if(strpos($product->product_image, "https://") !== false || strpos($product->product_image, "http://") !== false)
-                                <img src="{{ $product->product_image }} " style="max-width: 300px">
+                                <img src="{{ $product->product_image }} " style="max-width: 100%">
                             @else
-                                <img src="{{ Storage::url($product->product_image) }}" style="max-width: 300px">
+                                <img src="{{ Storage::url($product->product_image) }}" style="max-width: 100%">
                             @endif
                             <p class="mt-1">SKU: {{$product->product_sku}}</p>
                             <input class="rating rating-loading" value="{{ $product->averageRating }}" data-size="xs" disabled="">
