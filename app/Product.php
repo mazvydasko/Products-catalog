@@ -24,24 +24,24 @@ class Product extends Model
         $baseConfig = BasicConfig::first();
 
         if ($baseConfig->tax_flag) {
-            $price =  round($this->product_price * (1 + $baseConfig->tax_rate / 100), 2);
+            $price =  $this->product_price * (1 + $baseConfig->tax_rate / 100);
         } else {
-            $price = round($this->product_price, 2);
+            $price = $this->product_price;
         }
 
         if ($this->product_special_price) {
-            $price = round($price - $this->product_special_price, 2);
+            $price = $price - $this->product_special_price;
         }
 
         if ($baseConfig->global_discount && !$this->product_special_price) {
             if ($baseConfig->global_discount_type == 'fixed') {
-                $price = round($price - $baseConfig->global_discount, 2);
+                $price = $price - $baseConfig->global_discount;
             } else {
-                $price = round($price * (1 - $baseConfig->global_discount / 100), 2);
+                $price = $price * (1 - $baseConfig->global_discount / 100);
             }
         }
 
-        return '$' . $price;
+        return '$' . round($price, 2);
 
     }
 
@@ -51,12 +51,12 @@ class Product extends Model
 
         if ($baseConfig->global_discount || $this->product_special_price) {
             if ($baseConfig->tax_flag) {
-                $price =  round($this->product_price * (1 + $baseConfig->tax_rate / 100), 2);
+                $price =  $this->product_price * (1 + $baseConfig->tax_rate / 100);
             } else {
                 $price = $this->product_price;
             }
 
-            return '$' . $price;
+            return '$' . round($price, 2);
         } else {
             return;
         }
