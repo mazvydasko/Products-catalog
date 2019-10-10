@@ -23,6 +23,8 @@ class BasicConfigController extends Controller
         $configParams = BasicConfig::first();
         $configParams->tax_rate = $request->input('tax_rate');
         $configParams->save();
+
+        session()->flash('alert-success', 'Tax rate updated!');
         return redirect()->back();
     }
 
@@ -32,6 +34,8 @@ class BasicConfigController extends Controller
         $configParams->global_discount = $request->input('global_discount');
         $configParams->global_discount_type = $request->input('global_discount_type');
         $configParams->save();
+
+        session()->flash('alert-success', 'Global discount updated!');
         return redirect()->back();
     }
 
@@ -45,6 +49,8 @@ class BasicConfigController extends Controller
         }
 
         $configParams->save();
+
+        session()->flash('alert-success', 'Tax flag updated!');
         return redirect()->back();
     }
 
